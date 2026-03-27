@@ -203,5 +203,23 @@
             renderQuestion();
         });
     </script>
+    async function enviarResultados(nombreAlumno, notaObtenida) {
+    const URL_SCRIPT = "PEGA_AQUÍ_TU_URL_DE_APPS_SCRIPT";
+    
+    const datos = {
+        nombre: nombreAlumno,
+        tema: "HTML Básico", // Cambia esto según el cuestionario
+        nota: notaObtenida
+    };
+
+    // Enviamos los datos a Google Sheets
+    await fetch(URL_SCRIPT, {
+        method: 'POST',
+        mode: 'no-cors', // Importante para evitar bloqueos de seguridad simples
+        body: JSON.stringify(datos)
+    });
+
+    alert("¡Resultados guardados correctamente!");
+}
 </body>
 </html>
