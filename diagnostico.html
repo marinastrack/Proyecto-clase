@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Cuestionarios - ET N°16</title>
+    <!-- Cargamos iconos de Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f1f5f9;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header img {
+            height: 120px; /* Tamaño del escudo */
+            width: auto;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.2));
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: -0.025em;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+            margin: 5px 0 0 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px 60px 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: var(--primary);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: #eff6ff;
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .tag-math { background: #dcfce7; color: #166534; }
+        .tag-soon { background: #f1f5f9; color: #64748b; }
+
+        .card h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.25rem;
+            color: var(--text-main);
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .status {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            margin-right: 8px;
+        }
+
+        .locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .locked .status-dot {
+            background: #cbd5e1;
+        }
+
+        @media (max-width: 640px) {
+            .header { padding: 30px 20px; }
+            .header h1 { font-size: 1.6rem; }
+            .header img { height: 90px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <!-- Imagen del Escudo -->
+        <img src="Escudo ET 16.png" alt="Escudo ET N°16 España" onerror="this.style.display='none'">
+        <div>
+            <h1>ET N°16 España</h1>
+            <p>Matemática 4to Año - Portal de Cuestionarios</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+
+
+	<!-- Integrado -->
+            <a href="cuestionarios/qdiagintegrado.html" class="card">
+                <div class="card-icon"><i data-lucide="function-square"></i></div>
+               <!-- <span class="tag tag-math">Unidad 1</span> -->
+                <h3>Temas integrados</h3>
+                <p>Números reales y notación científica, Razones trigonométricas y Funciones.</p>
+                <div class="status">
+                    <span class="status-dot"></span> Disponible
+                </div>
+            </a>
+
+
+            
+            <!-- Unidad 1 -->
+            <a href="#" class="card locked">
+                <div class="card-icon"><i data-lucide="function-square"></i></div>
+                <span class="tag tag-math">Unidad 1</span>
+                <h3>Funciones Polinómicas</h3>
+                <p>Análisis de dominio, imagen, raíces y multiplicidad.</p>
+                <div class="status">
+                    <span class="status-dot"></span> Próximamente
+                </div>
+            </a>
+
+            <!-- Unidad 2 -->
+            <a href="#" class="card locked">
+                <div class="card-icon"><i data-lucide="calculator"></i></div>
+                <span class="tag tag-math">Unidad 2</span>
+                <h3>Logaritmos</h3>
+                <p>Propiedades de logaritmos y resolución de ecuaciones exponenciales.</p>
+                <div class="status">
+                    <span class="status-dot"></span> Próximamente
+                </div>
+            </a>
+
+            <!-- Unidad 3 -->
+            <a href="#" class="card locked">
+                <div class="card-icon"><i data-lucide="triangle"></i></div>
+                <span class="tag tag-soon">Unidad 3</span>
+                <h3>Trigonometría</h3>
+                <p>Razones trigonométricas, teoremas del seno y del coseno.</p>
+                <div class="status">
+                    <span class="status-dot"></span> Próximamente
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <script>
+        // Inicializa los iconos de Lucide
+        lucide.createIcons();
+    </script>
+</body>
+</html>
