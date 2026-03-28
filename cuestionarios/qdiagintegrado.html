@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivelación Matemática 4to - Escuela Técnica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración de MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                pageReady: () => {
+                    return MathJax.startup.defaultPageReady().then(() => {
+                        console.log('MathJax inicializado');
+                    });
+                }
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+    <style>
+        .option-card:hover { transform: translateY(-2px); transition: all 0.2s; }
+        .correct { background-color: #dcfce7 !important; border-color: #22c55e !important; }
+        .incorrect { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen p-4 md:p-8 font-sans text-slate-900">
+
+    <div class="max-w-3xl mx-auto">
+        <!-- Encabezado -->
+        <header class="bg-white rounded-2xl p-6 mb-8 shadow-sm border border-slate-200">
+            <h1 class="text-2xl font-bold text-slate-800 italic">ET N°16 "España" Matemática 4to</h1>
+            <h2 class="text-xl font-semibold text-blue-600 mt-1">Desafío de Nivelación</h2>
+            <p class="text-slate-600 mt-2">Repasamos herramientas clave: Notación Científica, Trigonometría y Análisis de Funciones.</p>
+            <div class="mt-6 flex items-center gap-4">
+                <div class="h-2 flex-1 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+                    <div id="progress-bar" class="h-full bg-blue-500 w-0 transition-all duration-700 ease-out"></div>
+                </div>
+                <span id="progress-text" class="text-sm font-bold text-slate-500">0/5</span>
+            </div>
+        </header>
+
+        <!-- Contenedor de Preguntas -->
+        <div id="quiz-container"></div>
+
+        <!-- Pantalla Final -->
+        <div id="final-screen" class="hidden text-center bg-white rounded-2xl p-10 shadow-xl border border-slate-200 animate-fade-in">
+            <div class="mb-6 inline-block p-4 bg-blue-50 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800 mb-2">¡Diagnóstico Completado!</h2>
+            <p class="text-slate-500 mb-6 italic">"La precisión es la base de toda técnica."</p>
+            <div id="final-score-container" class="mb-8">
+                <p id="final-score" class="text-5xl font-extrabold text-blue-600"></p>
+                <p class="text-slate-400 mt-2 uppercase tracking-widest text-xs font-bold">Puntaje Total</p>
+            </div>
+            <button onclick="location.reload()" class="bg-blue-600 text-white px-10 py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-200">
+                Reiniciar Práctica
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                q: "Si una partícula mide $0,000045$ metros, ¿cuál es su expresión correcta en notación científica?",
+                options: [
+                    { text: "$4,5 \\times 10^{-5}$", correct: true, feedback: "¡Exacto! Corrimos la coma 5 lugares a la derecha." },
+                    { text: "$4,5 \\times 10^{5}$", correct: false, feedback: "Ojo, el exponente positivo se usa para números mayores a 1." },
+                    { text: "$45 \\times 10^{-6}$", correct: false, feedback: "Aunque vale lo mismo, no es notación científica (el número debe ser < 10)." }
+                ]
+            },
+            {
+                q: "En un gráfico de temperatura que se estabiliza en los $50^\\circ C$ sin sobrepasarlos, ¿cómo se llama la línea imaginaria de tendencia?",
+                options: [
+                    { text: "Ordenada al origen", correct: false, feedback: "Ese es el valor de $y$ cuando $x=0$." },
+                    { text: "Asíntota horizontal", correct: true, feedback: "¡Correcto! Es el valor límite al que tiende la función." },
+                    { text: "Cero o Raíz", correct: false, feedback: "Eso sería si la temperatura llegara a $0^\\circ C$." }
+                ]
+            },
+            {
+                q: "Querés calcular el tensor de una antena (hipotenusa) y conocés la altura (cateto opuesto). ¿Qué razón aplicás?",
+                options: [
+                    { text: "$\\text{Seno}(\\alpha) = \\frac{\\text{Opuesto}}{\\text{Hipotenusa}}$", correct: true, feedback: "¡SOH! Es la relación más directa." },
+                    { text: "$\\text{Coseno}(\\alpha) = \\frac{\\text{Adyacente}}{\\text{Hipotenusa}}$", correct: false, feedback: "El Coseno requiere saber la distancia al suelo (Adyacente)." },
+                    { text: "$\\text{Tangente}(\\alpha) = \\frac{\\text{Opuesto}}{\\text{Adyacente}}$", correct: false, feedback: "La Tangente no involucra la hipotenusa." }
+                ]
+            },
+            {
+                q: "Si el valor de un repuesto se deprecia a la mitad cada año, ¿llegará matemáticamente a valer exactamente $\\$0$?",
+                options: [
+                    { text: "Sí, tarde o temprano.", correct: false, feedback: "En matemática, dividir por 2 infinitamente nunca da cero exacto." },
+                    { text: "No, el valor tiende a cero pero nunca lo toca.", correct: true, feedback: "Exacto, es un modelo exponencial con asíntota en $y=0$." }
+                ]
+            },
+            {
+                q: "Dividimos un presupuesto de $\\$1.000.000$ en 3 partes. ¿Cuál es el redondeo correcto a centésimos?",
+                options: [
+                    { text: "$\\$333.333,33$", correct: true, feedback: "¡Bien! Como el tercer decimal es un 3, el segundo no cambia." },
+                    { text: "$\\$333.333,34$", correct: false, feedback: "Error de redondeo. Solo subiría si el tercer decimal fuera $\\geq 5$." }
+                ]
+            }
+        ];
+
+        let currentStep = 0;
+        let score = 0;
+
+        function renderQuestion() {
+            if (currentStep >= questions.length) {
+                showFinal();
+                return;
+            }
+
+            const quizContainer = document.getElementById('quiz-container');
+            const question = questions[currentStep];
+            
+            quizContainer.innerHTML = `
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 animate-fade-in">
+                    <span class="text-blue-600 font-bold text-xs uppercase tracking-widest border-b-2 border-blue-100 pb-1">Situación ${currentStep + 1}</span>
+                    <h2 class="text-xl font-medium text-slate-800 mt-6 mb-8 leading-relaxed">${question.q}</h2>
+                    <div class="space-y-4">
+                        ${question.options.map((opt, i) => `
+                            <button onclick="checkAnswer(${i})" class="option-card w-full text-left p-5 rounded-xl border-2 border-slate-100 hover:border-blue-300 hover:bg-blue-50 transition-all flex justify-between items-center group">
+                                <span class="text-slate-700 font-medium">${opt.text}</span>
+                                <div class="h-6 w-6 rounded-full border-2 border-slate-200 group-hover:border-blue-400 flex items-center justify-center transition-colors">
+                                    <div class="h-2 w-2 rounded-full bg-blue-400 opacity-0 group-hover:opacity-100"></div>
+                                </div>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            // Verificación de seguridad para MathJax
+            if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+                MathJax.typesetPromise();
+            }
+
+            updateProgress();
+        }
+
+        window.checkAnswer = function(index) {
+            const question = questions[currentStep];
+            const isCorrect = question.options[index].correct;
+            const buttons = document.querySelectorAll('.option-card');
+            
+            buttons.forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === index) {
+                    btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+            });
+
+            if (isCorrect) score++;
+
+            const feedbackDiv = document.createElement('div');
+            feedbackDiv.className = `mt-6 p-4 rounded-xl text-sm animate-fade-in flex items-start gap-3 ${isCorrect ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`;
+            feedbackDiv.innerHTML = `
+                <span class="text-lg">${isCorrect ? '✅' : '❌'}</span>
+                <span>${question.options[index].feedback}</span>
+            `;
+            document.querySelector('.bg-white').appendChild(feedbackDiv);
+
+            setTimeout(() => {
+                currentStep++;
+                renderQuestion();
+            }, 2500);
+        }
+
+        function updateProgress() {
+            const progress = (currentStep / questions.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('progress-text').innerText = `${currentStep}/${questions.length}`;
+        }
+
+        function showFinal() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('final-screen').classList.remove('hidden');
+            document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+            updateProgress();
+        }
+
+        // Esperar a que el DOM esté listo para iniciar
+        window.addEventListener('load', () => {
+            renderQuestion();
+        });
+    </script>
+</body>
+</html>

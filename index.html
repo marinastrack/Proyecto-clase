@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Matemática - ET N°16 España</title>
+    <!-- Cargamos iconos de Lucide para un aspecto moderno -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f1f5f9;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --accent: #f59e0b;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+
+        /* Encabezado Institucional con escudo a la izquierda */
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: row; 
+            align-items: center;
+            justify-content: center; 
+            gap: 30px; 
+        }
+
+        .header img {
+            height: 120px;
+            width: auto;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+        }
+
+        .header-text {
+            text-align: left; 
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: -0.025em;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+            margin: 5px 0 0 0;
+            max-width: 600px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px 20px;
+        }
+
+        /* Cuadrícula de Cuestionarios */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: #eff6ff;
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .tag-diag { background: #fef3c7; color: #92400e; }
+        .tag-math { background: #dcfce7; color: #166534; }
+        .tag-soon { background: #f1f5f9; color: #64748b; }
+
+        .card h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.2rem;
+            color: var(--text-main);
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            flex-grow: 1;
+        }
+
+        .status {
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            margin-right: 8px;
+        }
+
+        .locked {
+            opacity: 0.7;
+            background: #f8fafc;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .locked .status-dot {
+            background: #cbd5e1;
+        }
+
+        /* Ajustes para móviles */
+        @media (max-width: 640px) {
+            .header { 
+                flex-direction: column; 
+                padding: 30px 20px;
+                gap: 15px;
+            }
+            .header-text { text-align: center; }
+            .header h1 { font-size: 1.6rem; }
+            .header img { height: 90px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <!-- Imagen del Escudo Institucional a la izquierda -->
+        <img src="Escudo ET 16.png" alt="Escudo ET N°16 España" onerror="this.style.display='none'">
+        
+        <div class="header-text">
+            <h1>ET N°16 España</h1>
+            <p>Matemática 4to Año - Análisis Matemático</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+            
+            <!-- 0. Diagnóstico -->
+            <a href="diagnostico.html" class="card">
+                <div class="card-icon"><i data-lucide="clipboard-check"></i></div>
+                <span class="tag tag-diag">Evaluación Inicial</span>
+                <h3>Diagnóstico</h3>
+                <p>Repaso de capacidades lógicas y conceptos fundamentales del ciclo anterior.</p>
+                <div class="status">
+                    <span class="status-dot"></span> Disponible
+                </div>
+            </a>
+
+            <!-- 1. Bimestre 1 -->
+            <a href="cuestionarios/bimestre1.html" class="card">
+                <div class="card-icon"><i data-lucide="move-right"></i></div>
+                <span class="tag tag-math">1° Bimestre</span>
+                <h3>Límites</h3>
+                <p>Entornos, límites laterales e indeterminaciones fundamentales.</p>
+                <div class="status">
+                    <span class="status-dot"></span> Disponible
+                </div>
+            </a>
+
+            <!-- 2. Bimestre 2 -->
+            <a href="cuestionarios/bimestre2.html" class="card">
+                <div class="card-icon"><i data-lucide="spline"></i></div>
+                <span class="tag tag-math">2° Bimestre</span>
+                <h3>Continuidad</h3>
+                <p>Análisis de funciones en un punto y clasificación de discontinuidades.</p>
+                <div class="status">
+                    <span class="status-dot"></span> Disponible
+                </div>
+            </a>
+
+            <!-- 3. Bimestre 3 -->
+            <a href="#" class="card locked">
+                <div class="card-icon"><i data-lucide="trending-up"></i></div>
+                <span class="tag tag-soon">3° Bimestre</span>
+                <h3>Derivadas</h3>
+                <p>Razón de cambio, reglas de derivación y derivada de funciones compuestas.</p>
+                <div class="status">
+                    <span class="status-dot"></span> Próximamente
+                </div>
+            </a>
+
+            <!-- 4. Bimestre 4 -->
+            <a href="#" class="card locked">
+                <div class="card-icon"><i data-lucide="bar-chart-3"></i></div>
+                <span class="tag tag-soon">4° Bimestre</span>
+                <h3>Análisis y Optimización</h3>
+                <p>Estudio completo de funciones y resolución de problemas situados.</p>
+                <div class="status">
+                    <span class="status-dot"></span> Próximamente
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <script>
+        // Inicializa los iconos de Lucide
+        lucide.createIcons();
+    </script>
+</body>
+</html>
