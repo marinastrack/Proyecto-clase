@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafío de Límites - ET N°16</title>
+    <title>Taller de Límites - GADO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -15,104 +15,130 @@
 </head>
 <body class="bg-slate-50 min-h-screen">
 
-    <div id="app" class="max-w-2xl mx-auto py-12 px-4"></div>
+    <div id="app" class="max-w-2xl mx-auto py-12 px-4">
+        <!-- Contenido dinámico -->
+    </div>
 
     <script>
         const quizData = [
             {
                 question: "1. Calcula el siguiente límite por reemplazo directo: lim x→3 (2x + 5).",
+                hint: "Sustituye el valor al que tiende x directamente en la expresión.",
                 options: [
-                    { text: "11", isCorrect: true, rationale: "Correcto. 2(3) + 5 = 6 + 5 = 11." },
-                    { text: "8", isCorrect: false, rationale: "Revisa la multiplicación por 2." },
-                    { text: "1", isCorrect: false, rationale: "Sustitución incorrecta." }
+                    { text: "1", rationale: "Este resultado sugeriría una resta en lugar de una suma.", isCorrect: false },
+                    { text: "8", rationale: "Probablemente se sumó el 3 sin multiplicar por el coeficiente 2.", isCorrect: false },
+                    { text: "11", rationale: "Al sustituir x por 3, obtenemos 2(3) + 5 = 6 + 5 = 11.", isCorrect: true },
+                    { text: "0", rationale: "El límite de un polinomio en un punto definido no suele ser cero.", isCorrect: false }
                 ]
             },
             {
-                question: "2. ¿Qué obtenemos inicialmente al evaluar lim x→2 (x² - 4)/(x - 2)?",
+                question: "2. ¿Qué resultado obtenemos inicialmente al evaluar lim x→2 (x² - 4)/(x - 2) mediante reemplazo directo?",
+                hint: "Evalúa numerador y denominador por separado sustituyendo x por 2.",
                 options: [
-                    { text: "0/0", isCorrect: true, rationale: "Exacto. Es una indeterminación que requiere salvarse." },
-                    { text: "4", isCorrect: false, rationale: "Ese es el resultado final, no el inicial." },
-                    { text: "No existe", isCorrect: false, rationale: "0/0 indica que hay que investigar más." }
+                    { text: "0/0", rationale: "Sustituyendo x=2, tanto (2²-4) como (2-2) se anulan.", isCorrect: true },
+                    { text: "4", rationale: "Este es el límite final, no el resultado del reemplazo inicial.", isCorrect: false },
+                    { text: "No existe", rationale: "0/0 es una indeterminación, no significa que no exista.", isCorrect: false },
+                    { text: "Indefinido", rationale: "En límites, 0/0 se llama 'Indeterminación'.", isCorrect: false }
                 ]
             },
             {
-                question: "3. En GESTIÓN: Si un costo tiende a 0/0 en un punto crítico, ¿qué significa el límite?",
+                question: "3. Para resolver lim x→5 (x² - 25)/(x - 5), ¿qué caso de factoreo es el más adecuado para el numerador?",
+                hint: "Observa que 25 es el cuadrado de 5 y hay una resta.",
                 options: [
-                    { text: "Hay una tendencia predecible a pesar de la falla.", isCorrect: true, rationale: "El límite predice el comportamiento donde la función no está definida." },
-                    { text: "El costo es inexistente.", isCorrect: false, rationale: "No, el límite puede darnos un valor finito." },
-                    { text: "Error de carga.", isCorrect: false, rationale: "Es una característica matemática del modelo." }
+                    { text: "Factor Común", rationale: "No hay variables o números que se repitan en ambos términos.", isCorrect: false },
+                    { text: "Diferencia de Cuadrados", rationale: "x² - 25 es una resta de dos cuadrados perfectos (x² y 5²).", isCorrect: true },
+                    { text: "Trinomio Cuadrado Perfecto", rationale: "La expresión solo tiene dos términos.", isCorrect: false },
+                    { text: "Suma de Cubos", rationale: "Los términos están al cuadrado y restando.", isCorrect: false }
                 ]
             },
             {
-                question: "4. ¿Qué caso de factoreo usarías para lim x→5 (x² - 25)/(x - 5)?",
+                question: "4. Al simplificar la expresión (x - 5)(x + 5) / (x - 5), ¿cuál es el resultado final del límite cuando x → 5?",
+                hint: "Cancela los términos iguales y sustituye x en lo que queda.",
                 options: [
-                    { text: "Diferencia de Cuadrados", isCorrect: true, rationale: "Correcto: (x-5)(x+5)." },
-                    { text: "Factor Común", isCorrect: false, rationale: "No hay términos comunes en el numerador." },
-                    { text: "Trinomio", isCorrect: false, rationale: "Solo hay dos términos." }
+                    { text: "5", rationale: "Sugeriría que solo quedó la variable x sola.", isCorrect: false },
+                    { text: "25", rationale: "Probablemente se elevó al cuadrado el valor en lugar de sumarlo.", isCorrect: false },
+                    { text: "0", rationale: "El resultado final no puede ser cero en este caso.", isCorrect: false },
+                    { text: "10", rationale: "Tras cancelar (x-5), queda (x+5). Al evaluar en x=5, 5+5=10.", isCorrect: true }
                 ]
             },
             {
-                question: "5. Calcula lim x→∞ (5x + 2) / (2x - 1).",
+                question: "5. Resuelve aplicando Factor Común: lim x→0 (4x² + 8x) / x.",
+                hint: "Extrae la x como factor común en el numerador antes de simplificar.",
                 options: [
-                    { text: "5/2", isCorrect: true, rationale: "Al tender a infinito, mandan los términos de mayor grado: 5x/2x = 5/2." },
-                    { text: "∞", isCorrect: false, rationale: "Como los grados son iguales, el límite es el cociente de coeficientes." },
-                    { text: "0", isCorrect: false, rationale: "Solo sería 0 si el grado del denominador fuera mayor." }
+                    { text: "8", rationale: "x(4x + 8) / x = 4x + 8. Al evaluar en x=0, queda 8.", isCorrect: true },
+                    { text: "4", rationale: "Este es el coeficiente de x², pero olvidaste el término lineal.", isCorrect: false },
+                    { text: "0", rationale: "Este sería el resultado si ignoraras el término constante 8.", isCorrect: false },
+                    { text: "12", rationale: "Sugeriría una suma incorrecta de coeficientes.", isCorrect: false }
                 ]
             },
             {
-                question: "6. Si lim x→a f(x) = L y f(a) no está definido, ¿qué hay en 'a'?",
+                question: "6. Calcula el valor de lim x→-1 (x² - 3x + 2).",
+                hint: "Ten cuidado con los signos al elevar (-1) al cuadrado y al multiplicar -3 por -1.",
                 options: [
-                    { text: "Un 'agujero' o punto evitable.", isCorrect: true, rationale: "La función se acerca a L pero no llega a tocarlo." },
-                    { text: "Una asíntota vertical.", isCorrect: false, rationale: "Eso pasaría si el límite fuera infinito." },
-                    { text: "Un salto infinito.", isCorrect: false, rationale: "Los límites laterales tendrían que ser distintos o infinitos." }
+                    { text: "0", rationale: "Cuidado: (-1)² es 1 positivo y -3*(-1) es 3 positivo.", isCorrect: false },
+                    { text: "2", rationale: "Probablemente se anularon los términos con x erróneamente.", isCorrect: false },
+                    { text: "4", rationale: "Error común en la suma de los términos.", isCorrect: false },
+                    { text: "6", rationale: "(-1)² - 3(-1) + 2 = 1 + 3 + 2 = 6.", isCorrect: true }
                 ]
             },
             {
-                question: "7. ¿Cuál es el límite lateral por derecha de f(x) = 1/x cuando x→0?",
+                question: "7. En GADO, si una función de costo tiende a 0/0 en un punto x, esto indica generalmente:",
+                hint: "0/0 permite 'salvar' la función mediante el factoreo.",
                 options: [
-                    { text: "+∞", isCorrect: true, rationale: "Al dividir 1 por números positivos muy pequeños, el resultado crece sin cota." },
-                    { text: "-∞", isCorrect: false, rationale: "Ese sería el límite por izquierda (x < 0)." },
-                    { text: "0", isCorrect: false, rationale: "1 dividido algo ínfimo da algo inmenso." }
+                    { text: "Costo infinito.", rationale: "El costo infinito suele ser una asíntota vertical (k/0).", isCorrect: false },
+                    { text: "Una discontinuidad evitable.", rationale: "Representa un punto donde el modelo puede salvarse algebraicamente.", isCorrect: true },
+                    { text: "La empresa quebró.", rationale: "Es una interpretación errónea de una indeterminación matemática.", isCorrect: false },
+                    { text: "Error de balance.", rationale: "Es una característica propia de las funciones racionales.", isCorrect: false }
                 ]
             },
             {
-                question: "8. ¿Cómo se resuelve la indeterminación ∞/∞ en funciones racionales?",
+                question: "8. Calcula el límite: lim x→4 (x - 4) / (x² - 16).",
+                hint: "Factoriza el denominador y recuerda que queda un 1 arriba.",
                 options: [
-                    { text: "Dividiendo por la mayor potencia de x.", isCorrect: true, rationale: "Es la técnica estándar para ver qué término domina." },
-                    { text: "Multiplicando por el conjugado.", isCorrect: false, rationale: "Esa técnica se usa para raíces." },
-                    { text: "Cancelando las x directamente.", isCorrect: false, rationale: "Se debe hacer con rigor algebraico." }
+                    { text: "0", rationale: "No se puede concluir 0 sin simplificar.", isCorrect: false },
+                    { text: "1/8", rationale: "1 / (x+4). Al evaluar en 4: 1 / (4+4) = 1/8.", isCorrect: true },
+                    { text: "1/4", rationale: "Error al evaluar el denominador simplificado.", isCorrect: false },
+                    { text: "8", rationale: "Olvidaste que la expresión queda en el denominador.", isCorrect: false }
                 ]
             },
             {
-                question: "9. Calcula lim x→0 (x² + 3x) / x.",
+                question: "9. ¿Qué sucede con el límite lim x→1 (x² - 1) / (x + 1)?",
+                hint: "Prueba sustituir antes de intentar factorizar.",
                 options: [
-                    { text: "3", isCorrect: true, rationale: "Factorizando x(x+3)/x, simplificas x y queda 0+3 = 3." },
-                    { text: "0", isCorrect: false, rationale: "Olvidaste el término lineal 3x." },
-                    { text: "∞", isCorrect: false, rationale: "Se puede salvar la indeterminación 0/0." }
+                    { text: "Es indeterminación 0/0.", rationale: "El denominador es 2, no es cero.", isCorrect: false },
+                    { text: "No existe.", rationale: "La función está perfectamente definida en x=1.", isCorrect: false },
+                    { text: "Se resuelve directo y da 0.", rationale: "Sustituyendo x=1 queda (1-1)/(1+1) = 0/2 = 0.", isCorrect: true },
+                    { text: "Da resultado 1.", rationale: "Cálculo incorrecto de la fracción.", isCorrect: false }
                 ]
             },
             {
-                question: "10. En el análisis de una lente, si el frente de onda tiende a infinito, se dice que los rayos son:",
+                question: "10. ¿Para cuál de estos límites es útil factorizar x² - 9?",
+                hint: "Busca el caso donde tanto el numerador como el denominador se hagan cero.",
                 options: [
-                    { text: "Paralelos", isCorrect: true, rationale: "Física óptica: a distancia infinita, la curvatura es nula (rayos paralelos)." },
-                    { text: "Convergentes", isCorrect: false, rationale: "Eso implicaría un límite puntual." },
-                    { text: "Divergentes", isCorrect: false, rationale: "Eso implicaría un foco cercano." }
+                    { text: "x → 3 de (x²-9)/(x-3)", rationale: "Genera 0/0 y la factorización cancela el término crítico.", isCorrect: true },
+                    { text: "x → 0 de (x²-9)/x", rationale: "Genera -9/0, es una asíntota vertical.", isCorrect: false },
+                    { text: "x → 9 de (x²-9)/(x-9)", rationale: "El numerador daría 72, no es 0/0.", isCorrect: false },
+                    { text: "x → -3 de (x²-9)/(x-3)", rationale: "El denominador es -6, da 0 directamente.", isCorrect: false }
                 ]
             },
             {
-                question: "11. ¿Qué representa una asíntota horizontal en un modelo de costos?",
+                question: "11. RETO EXPERTO: Calcula lim x→2 (3x² - 12) / (x - 2).",
+                hint: "Saca factor común 3 primero, luego aplica diferencia de cuadrados.",
                 options: [
-                    { text: "El costo mínimo fijo al que tiende la producción a gran escala.", isCorrect: true, rationale: "Es el valor límite del costo unitario." },
-                    { text: "Un costo que crece sin control.", isCorrect: false, rationale: "Eso sería una tendencia infinita." },
-                    { text: "El punto de quiebra.", isCorrect: false, rationale: "Eso se analiza con raíces o derivadas." }
+                    { text: "4", rationale: "Olvidaste el factor común 3 que extrajiste al principio.", isCorrect: false },
+                    { text: "12", rationale: "3(x²-4) = 3(x-2)(x+2). Al simplificar queda 3(x+2). 3(2+2) = 12.", isCorrect: true },
+                    { text: "6", rationale: "Error en el producto final de 3 * 4.", isCorrect: false },
+                    { text: "No se puede calcular", rationale: "Es salvable mediante el doble factoreo.", isCorrect: false }
                 ]
             },
             {
-                question: "12. Resuelve: lim x→2 (x - 2) / (x² - 4).",
+                question: "12. CASO DE GESTIÓN: Un modelo de costo variable unitario es f(x) = (x² - 100) / (x - 10). ¿A qué valor tiende el costo cuando la producción x se acerca a 10 unidades?",
+                hint: "Simplifica algebraicamente y luego evalúa el límite para x → 10.",
                 options: [
-                    { text: "1/4", isCorrect: true, rationale: "(x-2)/[(x-2)(x+2)] = 1/(x+2). Evaluando en 2 da 1/4." },
-                    { text: "1/2", isCorrect: false, rationale: "Revisa la suma en el denominador (2+2)." },
-                    { text: "0", isCorrect: false, rationale: "El numerador se simplifica, no queda en cero." }
+                    { text: "10", rationale: "Este valor ignora el incremento proporcional del modelo.", isCorrect: false },
+                    { text: "Infinito", rationale: "No es una explosión de costos, es una indeterminación salvable.", isCorrect: false },
+                    { text: "0", rationale: "El costo no desaparece, se estabiliza en una tendencia positiva.", isCorrect: false },
+                    { text: "20", rationale: "(x-10)(x+10)/(x-10) simplifica a (x+10). En x=10, el valor es 20.", isCorrect: true }
                 ]
             }
         ];
@@ -120,48 +146,52 @@
         let currentQuestion = 0;
         let score = 0;
         let selectedOption = null;
-        let shuffledOptions = [];
 
-        function shuffle(array) {
-            return array.sort(() => Math.random() - 0.5);
-        }
+        const app = document.getElementById('app');
 
         function render() {
-            const app = document.getElementById('app');
             if (currentQuestion >= quizData.length) {
                 renderResult();
                 return;
             }
 
             const data = quizData[currentQuestion];
-            
-            if (selectedOption === null) {
-                shuffledOptions = shuffle([...data.options]);
-            }
-
             const progress = ((currentQuestion + 1) / quizData.length) * 100;
 
             app.innerHTML = `
                 <div class="mb-8 flex justify-between items-end">
                     <div>
-                        <h1 class="text-2xl font-bold text-blue-900 tracking-tight">Unidad 1: Límites</h1>
-                        <p class="text-slate-500 text-sm">ET N°16 - Taller Integral (12 Preguntas)</p>
+                        <h1 class="text-2xl font-bold text-indigo-900 tracking-tight">Taller de Límites</h1>
+                        <p class="text-slate-500 text-sm font-medium">4to Año GADO - Práctica de Indeterminaciones</p>
                     </div>
                     <div class="text-right">
                         <div class="w-32 h-2 bg-slate-200 rounded-full overflow-hidden mb-1">
-                            <div class="h-full bg-blue-600 transition-all duration-500" style="width: ${progress}%"></div>
+                            <div class="h-full bg-indigo-600 transition-all duration-500" style="width: ${progress}%"></div>
                         </div>
-                        <span class="text-xs text-slate-400 font-bold uppercase">Pregunta ${currentQuestion + 1} de ${quizData.length}</span>
+                        <span class="text-xs text-slate-400 font-bold uppercase tracking-tighter">Pregunta ${currentQuestion + 1} de ${quizData.length}</span>
                     </div>
                 </div>
 
                 <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden animate-fade-in">
                     <div class="p-8">
+                        <div class="flex justify-between mb-6">
+                            <span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-bold uppercase tracking-widest">Nivel de Desafío</span>
+                            <button onclick="toggleHint()" class="text-slate-400 hover:text-amber-500 transition-colors" title="Ver pista">
+                                <i data-lucide="lightbulb" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                        
                         <h2 class="text-xl font-semibold mb-8 text-slate-800 leading-relaxed">${data.question}</h2>
+                        
+                        <div id="hint-box" class="hidden mb-6 p-4 bg-amber-50 border border-amber-100 rounded-2xl flex gap-3 items-start animate-fade-in">
+                            <i data-lucide="info" class="w-5 h-5 text-amber-500 mt-0.5 shrink-0"></i>
+                            <p class="text-sm text-amber-800 italic">${data.hint}</p>
+                        </div>
+
                         <div class="space-y-3">
-                            ${shuffledOptions.map((opt, i) => `
+                            ${data.options.map((opt, i) => `
                                 <button onclick="selectOption(${i})" ${selectedOption !== null ? 'disabled' : ''} 
-                                    class="w-full text-left p-5 rounded-2xl border-2 transition-all flex items-center justify-between
+                                    class="w-full text-left p-5 rounded-2xl border-2 transition-all flex items-center justify-between group
                                     ${getButtonStyle(i)}">
                                     <span class="font-medium">${opt.text}</span>
                                     ${getIcon(i)}
@@ -170,18 +200,16 @@
                         </div>
 
                         ${selectedOption !== null ? `
-                            <div class="mt-8 p-6 rounded-2xl animate-fade-in ${shuffledOptions[selectedOption].isCorrect ? 'bg-emerald-50 text-emerald-900' : 'bg-rose-50 text-rose-900'}">
-                                <p class="text-sm leading-relaxed"><strong>Explicación:</strong> ${shuffledOptions[selectedOption].rationale}</p>
+                            <div class="mt-8 p-6 rounded-2xl animate-fade-in ${data.options[selectedOption].isCorrect ? 'bg-emerald-50 text-emerald-900 border border-emerald-100' : 'bg-rose-50 text-rose-900 border border-rose-100'}">
+                                <p class="font-bold text-sm uppercase mb-1 tracking-wider">${data.options[selectedOption].isCorrect ? '¡Análisis correcto!' : 'Nota técnica:'}</p>
+                                <p class="text-sm opacity-90 leading-relaxed">${data.options[selectedOption].rationale}</p>
                             </div>
                         ` : ''}
                     </div>
 
-                    <div class="bg-slate-50 p-6 flex justify-between border-t border-slate-100">
-                        <button onclick="window.location.href='../index.html'" class="text-slate-400 hover:text-slate-600 font-medium flex items-center gap-2">
-                            <i data-lucide="arrow-left" class="w-4 h-4"></i> Salir
-                        </button>
+                    <div class="bg-slate-50 p-6 flex justify-end border-t border-slate-100">
                         <button onclick="nextQuestion()" ${selectedOption === null ? 'disabled' : ''} 
-                            class="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold disabled:opacity-50 hover:bg-blue-700 transition-all flex items-center gap-2">
+                            class="bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold disabled:opacity-50 hover:bg-indigo-700 active:scale-95 transition-all flex items-center gap-2 shadow-lg shadow-indigo-100">
                             ${currentQuestion === quizData.length - 1 ? 'Finalizar' : 'Siguiente'} <i data-lucide="chevron-right" class="w-5 h-5"></i>
                         </button>
                     </div>
@@ -191,24 +219,24 @@
         }
 
         function getButtonStyle(i) {
-            if (selectedOption === null) return "border-slate-100 hover:border-blue-300 hover:bg-blue-50";
+            if (selectedOption === null) return "border-slate-100 hover:border-indigo-300 hover:bg-indigo-50 active:bg-indigo-100";
             if (i === selectedOption) {
-                return shuffledOptions[i].isCorrect ? "border-emerald-500 bg-emerald-50" : "border-rose-500 bg-rose-50";
+                return quizData[currentQuestion].options[i].isCorrect ? "border-emerald-500 bg-emerald-50 shadow-sm" : "border-rose-500 bg-rose-50 shadow-sm";
             }
-            if (shuffledOptions[i].isCorrect) return "border-emerald-500 opacity-60";
-            return "opacity-40 border-slate-50 cursor-default";
+            if (quizData[currentQuestion].options[i].isCorrect) return "border-emerald-500 opacity-60";
+            return "opacity-40 border-slate-50 grayscale cursor-default";
         }
 
         function getIcon(i) {
             if (selectedOption === null) return '';
-            if (shuffledOptions[i].isCorrect) return '<i data-lucide="check-circle-2" class="text-emerald-500 w-6 h-6"></i>';
+            if (quizData[currentQuestion].options[i].isCorrect) return '<i data-lucide="check-circle-2" class="text-emerald-500 w-6 h-6"></i>';
             if (i === selectedOption) return '<i data-lucide="x-circle" class="text-rose-500 w-6 h-6"></i>';
             return '';
         }
 
         function selectOption(i) {
             selectedOption = i;
-            if (shuffledOptions[i].isCorrect) score++;
+            if (quizData[currentQuestion].options[i].isCorrect) score++;
             render();
         }
 
@@ -218,23 +246,36 @@
             render();
         }
 
+        function toggleHint() {
+            const hintBox = document.getElementById('hint-box');
+            hintBox.classList.toggle('hidden');
+        }
+
         function renderResult() {
-            const app = document.getElementById('app');
             const pct = Math.round((score / quizData.length) * 100);
+            let message = "¡Sigue practicando para dominar el factoreo!";
+            if (pct >= 70) message = "¡Gran trabajo! Tienes una base sólida en análisis matemático.";
+            if (pct === 100) message = "¡Nivel Consultor! Dominas las indeterminaciones de GADO.";
+
             app.innerHTML = `
                 <div class="bg-white rounded-3xl shadow-xl p-12 text-center animate-fade-in border border-slate-100">
-                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                        <i data-lucide="award" class="text-blue-600 w-10 h-10"></i>
+                    <div class="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-8">
+                        <i data-lucide="award" class="text-indigo-600 w-12 h-12"></i>
                     </div>
-                    <h2 class="text-3xl font-bold mb-2">¡Taller Finalizado!</h2>
-                    <p class="text-slate-500 mb-8">Análisis Matemático 4to - ET N°16</p>
-                    <div class="bg-slate-50 rounded-2xl p-8 mb-8">
-                        <div class="text-6xl font-black text-blue-600 mb-2">${pct}%</div>
+                    <h2 class="text-3xl font-bold mb-2 text-slate-800">Evaluación Finalizada</h2>
+                    <p class="text-slate-500 mb-8 font-medium">${message}</p>
+                    
+                    <div class="bg-slate-50 rounded-2xl p-8 mb-8 border border-slate-100">
+                        <div class="text-7xl font-black text-indigo-600 mb-2">${pct}%</div>
                         <p class="text-slate-400 font-bold uppercase tracking-widest text-xs">Aciertos: ${score} de ${quizData.length}</p>
                     </div>
-                    <button onclick="window.location.href='../index.html'" class="w-full bg-blue-600 text-white font-bold py-4 rounded-2xl hover:bg-blue-700 transition-all">
-                        Volver al Portal Principal
-                    </button>
+
+                    <div class="flex flex-col gap-3">
+                        <button onclick="location.reload()" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-2xl hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 shadow-lg shadow-indigo-100">
+                            <i data-lucide="rotate-ccw" class="w-5 h-5"></i> Reiniciar práctica
+                        </button>
+                        <p class="text-slate-400 text-xs mt-4 italic">Material diseñado para 4to Año GADO - Matemática Aplicada</p>
+                    </div>
                 </div>
             `;
             lucide.createIcons();
